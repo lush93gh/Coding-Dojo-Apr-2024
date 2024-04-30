@@ -1,6 +1,4 @@
-import org.junit.Assert.assertArrayEquals
 import org.junit.Assert.assertEquals
-import org.junit.Ignore
 
 //LRUCache lRUCache = new LRUCache(2);
 //lRUCache.put(1, 1); // cache is {1=1}
@@ -46,5 +44,45 @@ class LRUCacheTestCases {
         val actual2 = lruCache.get(2)
         assertEquals(-1, actual2)
     }
+
+    @org.junit.jupiter.api.Test
+    fun complex_LRU_case_2() {
+        val capability = 2
+        val lruCache = LRUCache(capability)
+        lruCache.put(1, 1)
+        lruCache.put(2, 2)
+        lruCache.assertGet(1, 1)    // return 1
+        lruCache.put(3, 3)
+        lruCache.assertGet(-1, 2)
+
+        lruCache.put(4, 4)
+        lruCache.assertGet(-1, 1)
+        lruCache.assertGet(3, 3)
+        lruCache.assertGet(4, 4)
+    }
+
+
+    @org.junit.jupiter.api.Test
+    fun complex_LRU_case_3() {
+        val capability = 2
+        val lruCache = LRUCache(capability)
+        lruCache.put(1, 1)
+        lruCache.put(2, 2)
+        lruCache.assertGet(1, 1)    // return 1
+        lruCache.put(3, 3)
+        lruCache.assertGet(-1, 2)
+        lruCache.assertGet(1, 1)
+        lruCache.put(4, 4)
+//        lruCache.assertGet(-1, 1)
+        lruCache.assertGet(-1, 3)
+//        lruCache.assertGet(4, 4)
+    }
+
+
+    private fun LRUCache.assertGet(expect: Int, key: Int) {
+        val actual = this.get(key)
+        assertEquals(expect, actual)
+    }
+
 
 }

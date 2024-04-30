@@ -18,7 +18,6 @@ class LRUCache(private val capacity: Int) {
     private val cache = mutableMapOf<Int, Int>()
     private val keyPriorityQueue = ArrayDeque<Int>(capacity)
 
-
     fun get(key: Int): Int {
         keyPriorityQueue.remove(key)
         keyPriorityQueue.add(key)
