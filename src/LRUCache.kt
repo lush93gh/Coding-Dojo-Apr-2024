@@ -15,12 +15,16 @@ import java.util.ArrayDeque
 class LRUCache(private val capacity: Int) {
 
     private val cache = mutableMapOf<Int, Int>()
+    private val keyPriority = mutableMapOf<Int, Int>()
+
 
     fun get(key: Int): Int {
+
         return cache[key]!!
     }
 
     fun put(key: Int, value: Int) {
         cache[key] = value
+        keyPriority[key] = 0
     }
 }
