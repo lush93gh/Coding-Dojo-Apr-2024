@@ -1,5 +1,6 @@
 import org.junit.Assert.assertArrayEquals
 import org.junit.Assert.assertEquals
+import org.junit.Ignore
 
 //LRUCache lRUCache = new LRUCache(2);
 //lRUCache.put(1, 1); // cache is {1=1}
@@ -12,10 +13,10 @@ import org.junit.Assert.assertEquals
 //lRUCache.get(3);    // return 3
 //lRUCache.get(4);    // return 4
 class LRUCacheTestCases {
-    private val capability = 100
 
     @org.junit.jupiter.api.Test
     fun getPositiveKeyValueSuccess() {
+        val capability = 100
         val lruCache = LRUCache(capability)
         val expected = 1
         lruCache.put(1, expected)
@@ -25,6 +26,7 @@ class LRUCacheTestCases {
 
     @org.junit.jupiter.api.Test
     fun getPositiveKeyValue2Success() {
+        val capability = 100
         val lruCache = LRUCache(capability)
         val expected = 2
         lruCache.put(2, expected)
@@ -33,10 +35,16 @@ class LRUCacheTestCases {
     }
 
     @org.junit.jupiter.api.Test
-    fun capacity_available() {
-        val lruCache = LRUCache(1)
+    fun complex_LRU_case() {
+        val capability = 2
+        val lruCache = LRUCache(capability)
         lruCache.put(1, 1)
         lruCache.put(2, 2)
+        val actual1 = lruCache.get(1)    // return 1
+        assertEquals(1, actual1)
+//        lruCache.put(3, 3)
+//        val actual2 = lruCache.get(2)
+//        assertEquals(-1, actual2)
     }
 
 }
