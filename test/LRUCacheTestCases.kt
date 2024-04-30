@@ -17,11 +17,26 @@ class LRUCacheTestCases {
     @org.junit.jupiter.api.Test
     fun getPositiveKeyValueSuccess() {
         val lruCache = LRUCache(capability)
-        val result = lruCache.get(1)
         val expected = 1
+        lruCache.put(1, expected)
+        val result = lruCache.get(1)
         assertEquals(expected, result)
     }
 
+    @org.junit.jupiter.api.Test
+    fun getPositiveKeyValue2Success() {
+        val lruCache = LRUCache(capability)
+        val expected = 2
+        lruCache.put(2, expected)
+        val result = lruCache.get(2)
+        assertEquals(expected, result)
+    }
 
+    @org.junit.jupiter.api.Test
+    fun capacity_available() {
+        val lruCache = LRUCache(1)
+        lruCache.put(1, 1)
+        lruCache.put(2, 2)
+    }
 
 }
