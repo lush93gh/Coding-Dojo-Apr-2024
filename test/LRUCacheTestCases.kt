@@ -42,9 +42,9 @@ class LRUCacheTestCases {
         lruCache.put(2, 2)
         val actual1 = lruCache.get(1)    // return 1
         assertEquals(1, actual1)
-//        lruCache.put(3, 3)
-//        val actual2 = lruCache.get(2)
-//        assertEquals(-1, actual2)
+        lruCache.put(3, 3)
+        val actual2 = lruCache.get(2)
+        assertEquals(-1, actual2)
     }
 
 }

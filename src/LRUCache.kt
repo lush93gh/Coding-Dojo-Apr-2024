@@ -1,5 +1,6 @@
 import java.util.Deque
 import java.util.ArrayDeque
+import java.util.concurrent.LinkedBlockingQueue
 
 /**
  * Design a data structure that follows the constraints of a Least Recently Used (LRU) cache.
@@ -15,16 +16,21 @@ import java.util.ArrayDeque
 class LRUCache(private val capacity: Int) {
 
     private val cache = mutableMapOf<Int, Int>()
-    private val keyPriority = mutableMapOf<Int, Int>()
+    private val keyPriorityQueue = ArrayDeque<Int>(capacity)
 
 
     fun get(key: Int): Int {
-
-        return cache[key]!!
+        keyPriorityQueue.remove(key)
+        keyPriorityQueue.add(key)
+        return cache[key] ?: -1
     }
 
     fun put(key: Int, value: Int) {
+        if (keyPriorityQueue.size >= capacity) {
+            val removeKey = keyPriorityQueue.pop()
+            cache.remove(removeKey)
+        }
+        keyPriorityQueue.add(key)
         cache[key] = value
-        keyPriority[key] = 0
     }
 }
