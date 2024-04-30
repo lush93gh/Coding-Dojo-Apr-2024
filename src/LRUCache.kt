@@ -25,6 +25,7 @@ class LRUCache(private val capacity: Int) {
     }
 
     fun put(key: Int, value: Int) {
+        keyPriorityQueue.remove(key)
         if (keyPriorityQueue.size >= capacity) {
             val removeKey = keyPriorityQueue.pop()
             cache.remove(removeKey)

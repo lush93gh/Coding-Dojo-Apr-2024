@@ -78,6 +78,26 @@ class LRUCacheTestCases {
 //        lruCache.assertGet(4, 4)
     }
 
+    @org.junit.jupiter.api.Test
+    fun complex_LRU_case_4() {
+        val capability = 2
+        val lruCache = LRUCache(capability)
+        lruCache.assertGet(-1, 2)
+        lruCache.put(2, 6)
+        lruCache.assertGet(-1, 1)
+        lruCache.put(1, 5)
+        lruCache.put(1, 2)
+        lruCache.assertGet(2, 1)
+        lruCache.assertGet(6, 2)
+    }
+
+
+    // ["LRUCache","get","put","get","put","put","get","get"]
+    // [[2],[2],[2,6],[1],[1,5],[1,2],[1],[2]]
+
+    // wa : [null,-1,null,-1,null,null,2,-1]
+    // [null,-1,null,-1,null,null,2,6]
+
 
     private fun LRUCache.assertGet(expect: Int, key: Int) {
         val actual = this.get(key)
