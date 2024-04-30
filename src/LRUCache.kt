@@ -15,7 +15,7 @@ import java.util.ArrayDeque
 class LRUCache(private val capacity: Int) {
 
     fun get(key: Int): Int {
-        return -1
+        return 1
     }
 
     fun put(key: Int, value: Int) {
